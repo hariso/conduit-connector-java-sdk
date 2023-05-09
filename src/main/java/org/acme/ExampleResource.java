@@ -1,7 +1,7 @@
 package org.acme;
 
-import io.conduit.grpc.Greeter;
-import io.conduit.grpc.HelloRequest;
+import io.conduit.sdk.grpc.Greeter;
+import io.conduit.sdk.grpc.HelloRequest;
 import io.quarkus.grpc.GrpcClient;
 import io.smallrye.mutiny.Uni;
 

@@ -1,4 +1,4 @@
-package io.conduit;
+package io.conduit.sdk;
 
 import connector.v1.Connector;
 import connector.v1.DestinationPluginGrpc;
