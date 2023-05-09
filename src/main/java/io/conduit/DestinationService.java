@@ -3,7 +3,9 @@ package io.conduit;
 import connector.v1.Connector;
 import connector.v1.DestinationPluginGrpc;
 import io.grpc.stub.StreamObserver;
+import io.quarkus.grpc.GrpcService;
 
+@GrpcService
 public class DestinationService extends DestinationPluginGrpc.DestinationPluginImplBase {
     @Override
     public void configure(Connector.Destination.Configure.Request request,

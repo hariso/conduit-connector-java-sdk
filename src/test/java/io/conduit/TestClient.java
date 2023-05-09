@@ -1,6 +1,7 @@
 package io.conduit;
 
 import connector.v1.Connector;
+import connector.v1.DestinationPluginGrpc;
 import connector.v1.SpecifierPluginGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -13,12 +14,12 @@ public class TestClient {
                 .build();
 
         // Create a Greeter client from the channel.
-        var stub = SpecifierPluginGrpc.newBlockingStub(channel);
+        var stub = DestinationPluginGrpc.newBlockingStub(channel);
 
         // Call the SayHello method with a HelloRequest.
-        var request = Connector.Specifier.Specify.Request.newBuilder()
+        var request = connector.v1.Connector.Destination.Configure.Request.newBuilder()
                 .build();
-        var response = stub.specify(request);
+        var response = stub.configure(request);
 
         // Print the response message.
         System.out.println("Response: " + response);
