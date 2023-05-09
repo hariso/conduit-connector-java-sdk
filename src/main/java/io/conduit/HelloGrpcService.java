@@ -1,16 +1,17 @@
 package io.conduit;
 
+import io.conduit.grpc.GreeterGrpc.GreeterImplBase;
+import io.grpc.stub.StreamObserver;
 import io.quarkus.grpc.GrpcService;
 
-import io.smallrye.mutiny.Uni;
-
 @GrpcService
-public class HelloGrpcService implements HelloGrpc {
+public class HelloGrpcService extends GreeterImplBase {
 
     @Override
-    public Uni<HelloReply> sayHello(HelloRequest request) {
-        return Uni.createFrom().item("Hello " + request.getName() + "!")
-                .map(msg -> HelloReply.newBuilder().setMessage(msg).build());
+    public void sayHello(io.conduit.grpc.HelloRequest request, StreamObserver<io.conduit.grpc.HelloReply> responseObserver) {
+        String name = request.getName();
+        String message = "Hello " + name;
+        responseObserver.onNext(io.conduit.grpc.HelloReply.newBuilder().setMessage(message).build());
+        responseObserver.onCompleted();
     }
-
 }
