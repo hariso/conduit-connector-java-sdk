@@ -5,14 +5,17 @@ import io.conduit.sdk.Record;
 import io.conduit.sdk.WriteResult;
 import jakarta.enterprise.context.ApplicationScoped;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
+import static java.util.Collections.emptyMap;
 
 @ApplicationScoped
 public class IcebergDestination implements io.conduit.sdk.Destination {
     @Override
     public Map<String, Parameter> parameters() {
-        return null;
+        return emptyMap();
     }
 
     @Override

@@ -1,10 +1,14 @@
 package io.conduit.sdk;
 
+import com.google.protobuf.ByteString;
 import io.conduit.grpc.Destination;
 import io.conduit.grpc.DestinationPluginGrpc;
+import io.conduit.grpc.Operation;
 import io.grpc.stub.StreamObserver;
 import io.quarkus.grpc.GrpcService;
 import jakarta.inject.Inject;
+
+import java.util.List;
 
 @GrpcService
 public class DestinationService extends DestinationPluginGrpc.DestinationPluginImplBase {
@@ -30,7 +34,32 @@ public class DestinationService extends DestinationPluginGrpc.DestinationPluginI
     @Override
     public StreamObserver<Destination.Run.Request> run(StreamObserver<Destination.Run.Response> responseObserver) {
         System.out.println("DestinationService::run");
-        return super.run(responseObserver);
+        return new StreamObserver<>() {
+            @Override
+            public void onNext(Destination.Run.Request request) {
+                // todo batching
+                WriteResult result = destination.write(
+                        List.of(Record.fromGRPC(request.getRecord()))
+                );
+                Destination.Run.Response.Builder responseB = Destination.Run.Response.newBuilder();
+                if (result.getError() != null) {
+                    responseB.setError(result.getError().toString());
+                } else {
+                    responseB.setAckPosition(request.getRecord().getPosition());
+                }
+                responseObserver.onNext(responseB.build());
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+
+            }
+
+            @Override
+            public void onCompleted() {
+                responseObserver.onCompleted();
+            }
+        };
     }
 
     @Override
