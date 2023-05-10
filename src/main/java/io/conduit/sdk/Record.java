@@ -30,6 +30,9 @@ public class Record {
     private final Change payload;
 
     public static Record fromGRPC(io.conduit.grpc.Record grpcRecord) {
+        if (grpcRecord == null) {
+            return null;
+        }
         return io.conduit.sdk.Record.builder()
                 .position(toSDKPosition(grpcRecord.getPosition()))
                 .metadata(grpcRecord.getMetadataMap())
@@ -44,11 +47,19 @@ public class Record {
     }
 
     private static Data toSDKData(io.conduit.grpc.Data grpcData) {
+        if (grpcData == null) {
+            return () -> new byte[0];
+        }
+
         return () -> grpcData.toByteArray();
     }
 
     private static Position toSDKPosition(ByteString position) {
         // todo hacky
+        if (position == null) {
+            return () -> new byte[0];
+        }
+
         return () -> position.toByteArray();
     }
 

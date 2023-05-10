@@ -30,7 +30,7 @@ public class IcebergDestination implements io.conduit.sdk.Destination {
 
     @Override
     public WriteResult write(List<Record> records) {
-        return null;
+        return new WriteResult(CollectionUtils.size(records), null);
     }
 
     @Override
