@@ -25,12 +25,13 @@ public class DestinationStream implements StreamObserver<Destination.Run.Request
         WriteResult result = destination.write(
             List.of(Record.fromGRPC(request.getRecord()))
         );
-        Destination.Run.Response.Builder responseB = Destination.Run.Response.newBuilder();
+        Destination.Run.Response.Builder responseB = Destination.Run.Response.newBuilder()
+            .setAckPosition(request.getRecord().getPosition());
+
         if (result.getError() != null) {
             responseB.setError(result.getError().getMessage() + "\n" + ExceptionUtils.getStackTrace(result.getError()));
-        } else {
-            responseB.setAckPosition(request.getRecord().getPosition());
         }
+
         responseObserver.onNext(responseB.build());
     }
 
