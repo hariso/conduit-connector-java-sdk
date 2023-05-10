@@ -3,11 +3,13 @@ package io.conduit.sdk;
 import com.google.protobuf.ByteString;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.util.Map;
 
 @Builder
 @Getter
+@ToString
 public class Record {
     // Operation defines what triggered the creation of a record.
 
@@ -36,12 +38,12 @@ public class Record {
             return null;
         }
         return io.conduit.sdk.Record.builder()
-                .position(toSDKPosition(grpcRecord.getPosition()))
-                .metadata(grpcRecord.getMetadataMap())
-                .operation(toSDKOperation(grpcRecord.getOperation()))
-                .key(toSDKData(grpcRecord.getKey()))
-                .payload(toSDKChange(grpcRecord.getPayload()))
-                .build();
+            .position(toSDKPosition(grpcRecord.getPosition()))
+            .metadata(grpcRecord.getMetadataMap())
+            .operation(toSDKOperation(grpcRecord.getOperation()))
+            .key(toSDKData(grpcRecord.getKey()))
+            .payload(toSDKChange(grpcRecord.getPayload()))
+            .build();
     }
 
     private static Change toSDKChange(io.conduit.grpc.Change payload) {
@@ -67,11 +69,11 @@ public class Record {
 
     private static io.conduit.sdk.Record.Operation toSDKOperation(io.conduit.grpc.Operation operation) {
         Map<io.conduit.grpc.Operation, Operation> m = Map.of(
-                io.conduit.grpc.Operation.OPERATION_UNSPECIFIED, Operation.UNSPECIFIED,
-                io.conduit.grpc.Operation.OPERATION_CREATE, Operation.CREATE,
-                io.conduit.grpc.Operation.OPERATION_UPDATE, Operation.UPDATE,
-                io.conduit.grpc.Operation.OPERATION_DELETE, Operation.DELETE,
-                io.conduit.grpc.Operation.OPERATION_SNAPSHOT, Operation.SNAPSHOT
+            io.conduit.grpc.Operation.OPERATION_UNSPECIFIED, Operation.UNSPECIFIED,
+            io.conduit.grpc.Operation.OPERATION_CREATE, Operation.CREATE,
+            io.conduit.grpc.Operation.OPERATION_UPDATE, Operation.UPDATE,
+            io.conduit.grpc.Operation.OPERATION_DELETE, Operation.DELETE,
+            io.conduit.grpc.Operation.OPERATION_SNAPSHOT, Operation.SNAPSHOT
         );
 
         return m.get(operation);

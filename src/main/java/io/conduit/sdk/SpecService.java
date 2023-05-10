@@ -18,15 +18,15 @@ public class SpecService extends SpecifierPluginGrpc.SpecifierPluginImplBase {
                         StreamObserver<Specifier.Specify.Response> responseObserver) {
 
         responseObserver.onNext(
-                Specifier.Specify.Response.newBuilder()
-                        .setName(specification.name())
-                        .setSummary(specification.summary())
-                        .setDescription(specification.description())
-                        .setVersion(specification.version())
-                        .setAuthor(specification.author())
-                        .putAllDestinationParams(emptyMap())
-                        .putAllSourceParams(emptyMap())
-                        .build()
+            Specifier.Specify.Response.newBuilder()
+                .setName(specification.name())
+                .setSummary(specification.summary())
+                .setDescription(specification.description())
+                .setVersion(specification.version())
+                .setAuthor(specification.author())
+                .putAllDestinationParams(emptyMap())
+                .putAllSourceParams(emptyMap())
+                .build()
         );
         responseObserver.onCompleted();
     }

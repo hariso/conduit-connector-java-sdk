@@ -8,7 +8,6 @@ import lombok.SneakyThrows;
 import org.jboss.logging.Logger;
 
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
@@ -56,9 +55,9 @@ public class FileDestination implements io.conduit.sdk.Destination {
             try {
                 stream.write(records.get(i).getPayload().getAfter().bytes());
                 stream.flush();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 logger.error("failed writing record", e);
-                
+
                 return new WriteResult(i, e);
             }
         }

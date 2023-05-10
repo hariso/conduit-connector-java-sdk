@@ -1,14 +1,10 @@
 package io.conduit.sdk;
 
-import com.google.protobuf.ByteString;
 import io.conduit.grpc.Destination;
 import io.conduit.grpc.DestinationPluginGrpc;
-import io.conduit.grpc.Operation;
 import io.grpc.stub.StreamObserver;
 import io.quarkus.grpc.GrpcService;
 import jakarta.inject.Inject;
-
-import java.util.List;
 
 @GrpcService
 public class DestinationService extends DestinationPluginGrpc.DestinationPluginImplBase {
@@ -19,7 +15,14 @@ public class DestinationService extends DestinationPluginGrpc.DestinationPluginI
     public void configure(Destination.Configure.Request request,
                           StreamObserver<Destination.Configure.Response> responseObserver) {
         System.out.println("DestinationService::configure");
-        responseObserver.onNext(Destination.Configure.Response.newBuilder().build());
+
+        try {
+            destination.configure(request.getConfigMap());
+            responseObserver.onNext(Destination.Configure.Response.newBuilder().build());
+        } catch (Exception e) {
+            responseObserver.onError(e);
+        }
+
         responseObserver.onCompleted();
     }
 
@@ -27,7 +30,14 @@ public class DestinationService extends DestinationPluginGrpc.DestinationPluginI
     public void start(Destination.Start.Request request,
                       StreamObserver<Destination.Start.Response> responseObserver) {
         System.out.println("DestinationService::start");
-        responseObserver.onNext(Destination.Start.Response.newBuilder().build());
+
+        try {
+            destination.open();
+            responseObserver.onNext(Destination.Start.Response.newBuilder().build());
+        } catch (Exception e) {
+            responseObserver.onError(e);
+        }
+
         responseObserver.onCompleted();
     }
 
