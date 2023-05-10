@@ -64,3 +64,4 @@ Create your first gRPC service
 - [ ] reflection doesn't work
 - [ ] update docs, which were copied from the Go SDK
 - [ ] remove Hello services
+- [ ] validations

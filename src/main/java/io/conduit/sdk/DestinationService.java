@@ -34,38 +34,15 @@ public class DestinationService extends DestinationPluginGrpc.DestinationPluginI
     @Override
     public StreamObserver<Destination.Run.Request> run(StreamObserver<Destination.Run.Response> responseObserver) {
         System.out.println("DestinationService::run");
-        return new StreamObserver<>() {
-            @Override
-            public void onNext(Destination.Run.Request request) {
-                // todo batching
-                WriteResult result = destination.write(
-                        List.of(Record.fromGRPC(request.getRecord()))
-                );
-                Destination.Run.Response.Builder responseB = Destination.Run.Response.newBuilder();
-                if (result.getError() != null) {
-                    responseB.setError(result.getError().toString());
-                } else {
-                    responseB.setAckPosition(request.getRecord().getPosition());
-                }
-                responseObserver.onNext(responseB.build());
-            }
 
-            @Override
-            public void onError(Throwable throwable) {
-
-            }
-
-            @Override
-            public void onCompleted() {
-                responseObserver.onCompleted();
-            }
-        };
+        return new DestinationStream(destination, responseObserver);
     }
 
     @Override
     public void stop(Destination.Stop.Request request,
                      StreamObserver<Destination.Stop.Response> responseObserver) {
         System.out.println("DestinationService::stop");
+
         responseObserver.onNext(Destination.Stop.Response.newBuilder().build());
         responseObserver.onCompleted();
 

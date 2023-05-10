@@ -2,10 +2,12 @@ package io.conduit.sdk;
 
 import com.google.protobuf.ByteString;
 import lombok.Builder;
+import lombok.Getter;
 
 import java.util.Map;
 
 @Builder
+@Getter
 public class Record {
     // Operation defines what triggered the creation of a record.
 

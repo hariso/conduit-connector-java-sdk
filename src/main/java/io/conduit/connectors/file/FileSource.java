@@ -1,21 +1,17 @@
-package io.conduit.connectors.iceberg;
+package io.conduit.connectors.file;
 
 import io.conduit.sdk.Parameter;
+import io.conduit.sdk.Position;
 import io.conduit.sdk.Record;
-import io.conduit.sdk.WriteResult;
 import jakarta.enterprise.context.ApplicationScoped;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
-import static java.util.Collections.emptyMap;
-
 @ApplicationScoped
-public class IcebergDestination implements io.conduit.sdk.Destination {
+public class FileSource implements io.conduit.sdk.Source {
     @Override
     public Map<String, Parameter> parameters() {
-        return emptyMap();
+        return null;
     }
 
     @Override
@@ -24,13 +20,18 @@ public class IcebergDestination implements io.conduit.sdk.Destination {
     }
 
     @Override
-    public void open() {
+    public void open(Position position) {
 
     }
 
     @Override
-    public WriteResult write(List<Record> records) {
-        return new WriteResult(CollectionUtils.size(records), null);
+    public Record read() {
+        return null;
+    }
+
+    @Override
+    public void ack(Position position) {
+
     }
 
     @Override

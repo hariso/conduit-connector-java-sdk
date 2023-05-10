@@ -1,23 +1,23 @@
-package io.conduit.connectors.iceberg;
+package io.conduit.connectors.file;
 
 import io.conduit.sdk.Specification;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class IcebergSpec implements Specification {
+public class FileSpec implements Specification {
     @Override
     public String name() {
-        return "iceberg";
+        return "file-java";
     }
 
     @Override
     public String summary() {
-        return "an iceberg connector";
+        return "a file connector written in java";
     }
 
     @Override
     public String description() {
-        return "an iceberge connector";
+        return summary();
     }
 
     @Override
