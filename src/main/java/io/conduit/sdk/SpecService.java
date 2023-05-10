@@ -1,7 +1,7 @@
 package io.conduit.sdk;
 
-import connector.v1.Connector;
-import connector.v1.SpecifierPluginGrpc;
+import io.conduit.grpc.Specifier;
+import io.conduit.grpc.SpecifierPluginGrpc;
 import io.grpc.stub.StreamObserver;
 import io.quarkus.grpc.GrpcService;
 
@@ -9,17 +9,19 @@ import static java.util.Collections.emptyMap;
 
 @GrpcService
 public class SpecService extends SpecifierPluginGrpc.SpecifierPluginImplBase {
+    private Specification specification;
+
     @Override
-    public void specify(Connector.Specifier.Specify.Request request,
-                        StreamObserver<Connector.Specifier.Specify.Response> responseObserver) {
+    public void specify(Specifier.Specify.Request request,
+                        StreamObserver<Specifier.Specify.Response> responseObserver) {
 
         responseObserver.onNext(
-                Connector.Specifier.Specify.Response.newBuilder()
-                        .setName("java-sdk-name")
-                        .setSummary("Conduit Connector Java SDK")
-                        .setDescription("Conduit Connector Java SDK -- description")
-                        .setVersion("v0.1.0")
-                        .setAuthor("Meroxa, Inc.")
+                Specifier.Specify.Response.newBuilder()
+                        .setName(specification.getName())
+                        .setSummary(specification.getSummary())
+                        .setDescription(specification.getDescription())
+                        .setVersion(specification.getVersion())
+                        .setAuthor(specification.getAuthor())
                         .putAllDestinationParams(emptyMap())
                         .putAllSourceParams(emptyMap())
                         .build()

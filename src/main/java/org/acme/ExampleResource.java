@@ -1,10 +1,9 @@
 package org.acme;
 
-import io.conduit.sdk.grpc.Greeter;
-import io.conduit.sdk.grpc.HelloRequest;
+import io.conduit.grpc.Greeter;
+import io.conduit.grpc.HelloRequest;
 import io.quarkus.grpc.GrpcClient;
 import io.smallrye.mutiny.Uni;
-
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;

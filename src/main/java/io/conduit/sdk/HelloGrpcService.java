@@ -1,8 +1,8 @@
 package io.conduit.sdk;
 
-import io.conduit.sdk.grpc.GreeterGrpc;
-import io.conduit.sdk.grpc.HelloReply;
-import io.conduit.sdk.grpc.HelloRequest;
+import io.conduit.grpc.GreeterGrpc;
+import io.conduit.grpc.HelloReply;
+import io.conduit.grpc.HelloRequest;
 import io.grpc.stub.StreamObserver;
 import io.quarkus.grpc.GrpcService;
 

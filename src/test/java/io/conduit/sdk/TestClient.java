@@ -1,8 +1,7 @@
 package io.conduit.sdk;
 
-import connector.v1.Connector;
-import connector.v1.DestinationPluginGrpc;
-import connector.v1.SpecifierPluginGrpc;
+import io.conduit.grpc.Destination;
+import io.conduit.grpc.DestinationPluginGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
@@ -17,7 +16,7 @@ public class TestClient {
         var stub = DestinationPluginGrpc.newBlockingStub(channel);
 
         // Call the SayHello method with a HelloRequest.
-        var request = connector.v1.Connector.Destination.Configure.Request.newBuilder()
+        var request = Destination.Configure.Request.newBuilder()
                 .build();
         var response = stub.configure(request);
 
