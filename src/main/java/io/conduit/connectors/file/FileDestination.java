@@ -5,6 +5,7 @@ import io.conduit.sdk.Record;
 import io.conduit.sdk.WriteResult;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.SneakyThrows;
+import org.jboss.logging.Logger;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,6 +15,8 @@ import java.util.Map;
 
 @ApplicationScoped
 public class FileDestination implements io.conduit.sdk.Destination {
+    private static final Logger logger = Logger.getLogger(FileDestination.class);
+
     private Path path;
     private FileOutputStream stream;
 
@@ -54,6 +57,8 @@ public class FileDestination implements io.conduit.sdk.Destination {
                 stream.write(records.get(i).getPayload().getAfter().bytes());
                 stream.flush();
             } catch (IOException e) {
+                logger.error("failed writing record", e);
+                
                 return new WriteResult(i, e);
             }
         }
