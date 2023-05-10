@@ -73,6 +73,9 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <methodName></methodName>
+                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>

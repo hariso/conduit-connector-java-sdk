@@ -3,9 +3,11 @@ package io.conduit.connectors.iceberg;
 import io.conduit.sdk.Parameter;
 import io.conduit.sdk.Position;
 import io.conduit.sdk.Record;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.Map;
 
+@ApplicationScoped
 public class Source implements io.conduit.sdk.Source {
     @Override
     public Map<String, Parameter> parameters() {

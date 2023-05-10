@@ -62,6 +62,5 @@ Create your first gRPC service
 
 - [ ] Health check
 - [ ] reflection doesn't work
-- [ ] dirty code which prints the go-plugin handshake info
 - [ ] update docs, which were copied from the Go SDK
 - [ ] remove Hello services

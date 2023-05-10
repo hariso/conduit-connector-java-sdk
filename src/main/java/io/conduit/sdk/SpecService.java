@@ -4,11 +4,13 @@ import io.conduit.grpc.Specifier;
 import io.conduit.grpc.SpecifierPluginGrpc;
 import io.grpc.stub.StreamObserver;
 import io.quarkus.grpc.GrpcService;
+import jakarta.inject.Inject;
 
 import static java.util.Collections.emptyMap;
 
 @GrpcService
 public class SpecService extends SpecifierPluginGrpc.SpecifierPluginImplBase {
+    @Inject
     private Specification specification;
 
     @Override

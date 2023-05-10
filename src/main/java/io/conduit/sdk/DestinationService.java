@@ -4,9 +4,13 @@ import io.conduit.grpc.Destination;
 import io.conduit.grpc.DestinationPluginGrpc;
 import io.grpc.stub.StreamObserver;
 import io.quarkus.grpc.GrpcService;
+import jakarta.inject.Inject;
 
 @GrpcService
 public class DestinationService extends DestinationPluginGrpc.DestinationPluginImplBase {
+    @Inject
+    io.conduit.sdk.Destination destination;
+
     @Override
     public void configure(Destination.Configure.Request request,
                           StreamObserver<Destination.Configure.Response> responseObserver) {
