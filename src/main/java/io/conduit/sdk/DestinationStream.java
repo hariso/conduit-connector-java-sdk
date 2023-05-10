@@ -29,7 +29,7 @@ public class DestinationStream implements StreamObserver<Destination.Run.Request
             .setAckPosition(request.getRecord().getPosition());
 
         if (result.getError() != null) {
-            responseB.setError(result.getError().getMessage() + "\n" + ExceptionUtils.getStackTrace(result.getError()));
+            responseB.setError(result.getErrorString());
         }
 
         responseObserver.onNext(responseB.build());

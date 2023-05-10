@@ -65,3 +65,5 @@ Create your first gRPC service
 - [ ] update docs, which were copied from the Go SDK
 - [ ] remove Hello services
 - [ ] validations
+- [ ] destination: batching
+- [ ] destination.stop: wait for last position to be written
