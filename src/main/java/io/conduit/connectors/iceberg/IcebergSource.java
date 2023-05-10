@@ -1,13 +1,14 @@
 package io.conduit.connectors.iceberg;
 
 import io.conduit.sdk.Parameter;
+import io.conduit.sdk.Position;
 import io.conduit.sdk.Record;
-import io.conduit.sdk.WriteResult;
+import jakarta.enterprise.context.ApplicationScoped;
 
-import java.util.List;
 import java.util.Map;
 
-public class Destination implements io.conduit.sdk.Destination {
+@ApplicationScoped
+public class IcebergSource implements io.conduit.sdk.Source {
     @Override
     public Map<String, Parameter> parameters() {
         return null;
@@ -19,13 +20,18 @@ public class Destination implements io.conduit.sdk.Destination {
     }
 
     @Override
-    public void open() {
+    public void open(Position position) {
 
     }
 
     @Override
-    public WriteResult write(List<Record> records) {
+    public Record read() {
         return null;
+    }
+
+    @Override
+    public void ack(Position position) {
+
     }
 
     @Override

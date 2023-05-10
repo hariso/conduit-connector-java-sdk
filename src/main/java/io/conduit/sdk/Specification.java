@@ -1,16 +1,13 @@
 package io.conduit.sdk;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
+public interface Specification {
+    String name();
 
-@AllArgsConstructor
-@Getter
-@Builder
-public class Specification {
-    private final String name;
-    private final String summary;
-    private final String description;
-    private final String version;
-    private final String author;
+    String summary();
+
+    String description();
+
+    String version();
+
+    String author();
 }

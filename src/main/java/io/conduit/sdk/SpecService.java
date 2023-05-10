@@ -19,11 +19,11 @@ public class SpecService extends SpecifierPluginGrpc.SpecifierPluginImplBase {
 
         responseObserver.onNext(
                 Specifier.Specify.Response.newBuilder()
-                        .setName(specification.getName())
-                        .setSummary(specification.getSummary())
-                        .setDescription(specification.getDescription())
-                        .setVersion(specification.getVersion())
-                        .setAuthor(specification.getAuthor())
+                        .setName(specification.name())
+                        .setSummary(specification.summary())
+                        .setDescription(specification.description())
+                        .setVersion(specification.version())
+                        .setAuthor(specification.author())
                         .putAllDestinationParams(emptyMap())
                         .putAllSourceParams(emptyMap())
                         .build()
