@@ -67,3 +67,5 @@ Create your first gRPC service
 - [ ] validations
 - [ ] destination: batching
 - [ ] destination.stop: wait for last position to be written
+- [ ] extract the sdk
+- [ ] graceful shutdown

@@ -53,6 +53,7 @@ public class DestinationService extends DestinationPluginGrpc.DestinationPluginI
                      StreamObserver<Destination.Stop.Response> responseObserver) {
         System.out.println("DestinationService::stop");
 
+        // todo wait for last received record to actually be written
         responseObserver.onNext(Destination.Stop.Response.newBuilder().build());
         responseObserver.onCompleted();
 
@@ -62,7 +63,13 @@ public class DestinationService extends DestinationPluginGrpc.DestinationPluginI
     public void teardown(Destination.Teardown.Request request,
                          StreamObserver<Destination.Teardown.Response> responseObserver) {
         System.out.println("DestinationService::teardown");
-        responseObserver.onNext(Destination.Teardown.Response.newBuilder().build());
+
+        try {
+            destination.teardown();
+            responseObserver.onNext(Destination.Teardown.Response.newBuilder().build());
+        } catch (Exception e) {
+            responseObserver.onError(e);
+        }
         responseObserver.onCompleted();
     }
 
